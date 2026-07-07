@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.jpg" width="460" alt="memory-maintain — an elephant filing every card into a cabinet, forgetting nothing">
+</p>
+
 <h1 align="center">memory-maintain</h1>
 
 <p align="center">
