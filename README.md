@@ -21,6 +21,10 @@
   <sub>Claude Code loads <code>MEMORY.md</code> whole into every session under a hard byte budget (~24KB in the project where this was found; the number is observed, not vendor-documented). Anything over the budget is silently truncated from the end of the file — which is usually where the standing rules and reference facts live. This skill keeps the index small and moves everything else into per-topic files that recall can still reach. Verified with a RED/GREEN baseline test against a copy of a real 160KB production index (261 entries). <a href="#numbers">Numbers</a> &middot; <a href="#how-it-works">how it works</a>.</sub>
 </p>
 
+<p align="center">
+  <sub><strong>English</strong> &middot; <a href="README.ru.md">Русский</a></sub>
+</p>
+
 ---
 
 Claude Code's memory is two tiers. `MEMORY.md` is an **index** loaded whole every session. Topic files (`project_*.md`, `feedback_*.md`, `reference_*.md`) hold the actual knowledge and come back through recall regardless of index size. The index has a byte budget; the topic files do not.
@@ -28,6 +32,10 @@ Claude Code's memory is two tiers. `MEMORY.md` is an **index** loaded whole ever
 Left unmanaged the index only grows — a new memory gets written as a fat line, an update gets appended to an existing line, nothing is ever archived. Once it's over budget, the **oldest** entries at the end fall out of every session, silently, with no error. Those are usually the rules you set on day one. That's why the agent keeps doing the thing you told it not to.
 
 memory-maintain fixes the write habit at the source and compacts the index losslessly when it grows too big.
+
+<p align="center">
+  <img src="assets/diagram-en.png" width="100%" alt="MEMORY.md loads whole every session under a byte budget. Everything below the budget line is silently truncated, and that tail is where your day-one rules live.">
+</p>
 
 ## Before / after
 
